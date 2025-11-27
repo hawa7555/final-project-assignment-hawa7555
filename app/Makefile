@@ -4,7 +4,7 @@ LDFLAGS =
 
 TARGET = aitutor
 
-SRCS = main.c led_control.c audio_capture.c audio_playback.c stt_interface.c llm_interface.c tts_interface.c
+SRCS = main.c led_control.c audio_capture.c audio_playback.c stt_interface.c llm_interface.c tts_interface.c sentence_queue.c
 
 OBJS = $(SRCS:.c=.o)
 
