@@ -7,6 +7,8 @@
 
 int stt_transcribe(const char *audio_file, char *text_output, size_t max_len)
 {
+    printf("STT Build Marker: v100\n");
+
     char cmd[1024];
     FILE *fp;
     char line[512];
