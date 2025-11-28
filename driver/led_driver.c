@@ -45,13 +45,13 @@ static struct cdev aitutor_cdev;
 
 static int led_open(struct inode *inode, struct file *file)
 {
-    pr_info("%s: device opened\n", DEVICE_NAME);
+    pr_debug("%s: device opened\n", DEVICE_NAME);
     return 0;
 }
 
 static int led_release(struct inode *inode, struct file *file)
 {
-    pr_info("%s: device closed\n", DEVICE_NAME);
+    pr_debug("%s: device closed\n", DEVICE_NAME);
     return 0;
 }
 
