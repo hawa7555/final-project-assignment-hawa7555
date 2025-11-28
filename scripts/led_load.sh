@@ -2,7 +2,6 @@
 module=led_driver
 device=aitutor_led
 mode="666"
-led_gpio_default=23
 
 set -e
 
@@ -13,13 +12,15 @@ else
     group="wheel"
 fi
 
-# Load the module using modprobe (works in Buildroot)
+# Load module
 echo "Loading module ${module}"
-if echo "$*" | grep -q "led_gpio="; then
-    modprobe ${module} "$@" || exit 1
-else
-    modprobe ${module} led_gpio=${led_gpio_default} "$@" || exit 1
-fi
+modprobe ${module} \
+    gpio_base=0 \
+    led_gpio=24 \
+    red_led_gpio=23 \
+    start_button_gpio=17 \
+    cancel_button_gpio=27 \
+    "$@" || exit 1
 
 # Get major number from /proc/devices
 major=$(awk "\$2==\"$device\" {print \$1}" /proc/devices)
@@ -35,5 +36,7 @@ chgrp "$group" /dev/${device} 2>/dev/null || true
 chmod "$mode" /dev/${device}
 
 echo "LED driver loaded successfully"
+echo "Green LED: GPIO 24, Red LED: GPIO 23"
+echo "START button: GPIO 17, CANCEL button: GPIO 27"
 echo "Device node: /dev/${device} (major: $major, minor: 0)"
 ls -l /dev/${device}

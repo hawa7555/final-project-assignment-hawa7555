@@ -13,10 +13,10 @@ int stt_transcribe(const char *audio_file, char *text_output, size_t max_len)
     printf("Transcribing: %s\n", audio_file);
     
     // Set library path and run whisper-cli
-    snprintf(cmd, sizeof(cmd), "export LD_LIBRARY_PATH=/home/harsh/aesd/whisper.cpp/build/src:/home/harsh/aesd/whisper.cpp/build/ggml/src && "
-             "/home/harsh/aesd/whisper.cpp/build/bin/whisper-cli "
-             "-m /home/harsh/aesd/whisper.cpp/models/ggml-tiny.en.bin "
-             "-f %s 2>&1 | grep '\\[00:' | head -1",
+     snprintf(cmd, sizeof(cmd),
+             "/usr/bin/whisper-cli "
+             "-m /root/models/whisper/ggml-tiny.en.bin "
+             "-f '%s'",
              audio_file);
     
     fp = popen(cmd, "r");

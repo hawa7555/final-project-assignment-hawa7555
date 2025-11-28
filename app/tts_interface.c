@@ -30,7 +30,11 @@ int tts_synthesize(const char *text, const char *output_file)
     escaped_text[j] = '\0';
     
     // Use single quotes
-    snprintf(cmd, sizeof(cmd), "echo '%s' | /home/harsh/piper/piper --model /home/harsh/piper/en_US-lessac-medium.onnx --output_file %s 2>/dev/null", escaped_text, output_file);
+    snprintf(cmd, sizeof(cmd),
+             "echo '%s' | /usr/bin/piper "
+             "--model /root/models/en_US-lessac-medium.onnx "
+             "--output_file '%s'",
+             escaped_text, output_file);
     
     printf("%s\n", output_file);
     
