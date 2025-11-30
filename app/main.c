@@ -374,10 +374,14 @@ void* pipeline_thread(void* arg)
 
 int main(int argc, char *argv[])
 {
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
+
     pthread_t pipeline_tid, tts_tid[2], playback_tid;
     int tts_thread_ids[2] = {1, 2};
     
     printf(" AI Tutor Starting \n");
+    fprintf(stderr, "AI Tutor started - this is stderr\n");
     
     // Initialize queues 
     queue_init(&sentence_queue);
@@ -458,6 +462,7 @@ int main(int argc, char *argv[])
                 else
                 {
                     printf("\nSTART button pressed!\n");
+                    fprintf(stderr, "Button pressed! Starting listening... (stderr)\n");
                     // Signal pipeline to start 
                     pipeline_active = true;
                 }
