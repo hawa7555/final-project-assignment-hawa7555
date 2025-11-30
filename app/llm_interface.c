@@ -90,7 +90,7 @@ int llm_query_stream(const char *user_query, void (*sentence_callback)(const cha
     char current_sentence[1024] = "";
     char sentence_buffer[1024] = "";  // Buffer to accumulate short sentences
     int buffer_len = 0;
-    const int MIN_SENTENCE_LENGTH = 100;  // Minimum chars before sending to TTS
+    const int MIN_SENTENCE_LENGTH = 120;  // Minimum chars before sending to TTS
     
     printf("Streaming LLM query: %s\n", user_query);
     

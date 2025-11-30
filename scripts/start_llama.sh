@@ -24,6 +24,7 @@ nohup $LLAMA_BIN \
     --port 8080 \
     --host 0.0.0.0 \
     -c 2048 \
+    -t 4 \
     -ngl 0 \
     > $LOG_FILE 2>&1 &
 
