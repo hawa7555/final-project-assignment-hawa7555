@@ -499,6 +499,12 @@ int main(int argc, char *argv[])
     pthread_join(tts_tid[0], NULL);
     pthread_join(tts_tid[1], NULL);
     pthread_join(playback_tid, NULL);
+
+    // LED cleanup
+    pthread_mutex_lock(&led_mutex);
+    led_set_status(LED_STATUS_IDLE);
+    led_cleanup();
+    pthread_mutex_unlock(&led_mutex);
     
     // Cleanup 
     queue_cleanup(&sentence_queue);
