@@ -189,7 +189,8 @@ int llm_query_stream(const char *user_query, void (*sentence_callback)(const cha
     }
     
     // Send any remaining buffered content
-    if (strlen(sentence_buffer) > 0) {
+    if (strlen(sentence_buffer) > 0)
+    {
         sentence_callback(sentence_buffer, user_data);
     }
     

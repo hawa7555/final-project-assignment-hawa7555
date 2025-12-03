@@ -88,8 +88,22 @@ int read_buttons(int *start_pressed, int *cancel_pressed)
 // Callback function for to push LLM sentence response to queue
 void sentence_ready_callback(const char *sentence, void *user_data)
 {
-    printf("LLM streamed: %s\n", sentence);
-    queue_push(&sentence_queue, sentence);
+    // sentence += strspn(sentence, "\n\r\t");
+    // while (*sentence == '\n') sentence++; 
+    // printf("LLM streamed without \n: %s\n", sentence);
+    // queue_push(&sentence_queue, sentence);
+
+    char* ptr = (char*)sentence;
+    
+    while (*ptr == '\\' && *(ptr + 1) == 'n')
+    {
+        ptr += 2;
+    }
+    
+    printf("LLM streamed without new: %s\n", ptr);
+    fflush(stdout);
+    
+    queue_push(&sentence_queue, ptr);
 }
 
 // Playback Thread
